@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Central de Bomberos · Huinca Renancó</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="red-theme">
+  <!-- Header / Navegación -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="#home">🚒 Bomberos · Huinca Renancó</a>
+
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">☰</button>
+
+      <nav id="mainNav" class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#alerts">Alertas</a></li>
+          <li><a href="#historial">Historial</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <!-- HOME: Información sobre Huinca Renancó -->
+    <section id="home" class="home" aria-labelledby="homeTitle">
+      <div class="home-hero" role="region" aria-label="Hero Huinca Renancó">
+        <div class="home-hero-image" aria-hidden="true">
+          <!-- Reemplaza background-image en styles.css por tu imagen o inserta <img> aquí -->
+        </div>
+
+        <div class="home-hero-content">
+          <h1 id="homeTitle">Huinca Renancó</h1>
+          <p class="subtitle">Ciudad del sur de la provincia de Córdoba, Argentina</p>
+          <p class="lead">Centro agrícola y ganadero con historia ferroviaria y vida comunitaria activa.</p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#alerts" id="ctaAlerts">🚨 Ir a Central de Alertas</a>
+            <a class="btn ghost" href="#atractivos">Ver atractivos</a>
+          </div>
+
+          <p class="hero-note">Consejo: en móvil el botón de alerta permanece accesible en la parte inferior.</p>
+        </div>
+      </div>
+
+      <div class="home-grid" aria-hidden="false">
+        <article class="card" id="historia" tabindex="0">
+          <h2>Breve historia</h2>
+          <p>Huinca Renancó creció a fines del siglo XIX con la llegada del ferrocarril. Su desarrollo estuvo ligado a la producción agropecuaria y al intercambio regional.</p>
+        </article>
+
+        <article class="card" id="atractivos" tabindex="0">
+          <h2>Atractivos</h2>
+          <ul>
+            <li>Plaza central y paseos arbolados</li>
+            <li>Eventos culturales y festivales locales</li>
+            <li>Rutas rurales para turismo de campo</li>
+          </ul>
+        </article>
+
+        <article class="card" id="datos" tabindex="0">
+          <h2>Datos prácticos</h2>
+          <p><strong>Clima:</strong> templado; veranos cálidos e inviernos frescos.</p>
+          <p><strong>Población aproximada:</strong> 8.000–10.000 habitantes (estimado).</p>
+        </article>
+
+        <article class="card" id="ubicacion" tabindex="0">
+          <h2>Ubicación</h2>
+          <p>Provincia de Córdoba, departamento Roque Sáenz Peña.</p>
+          <div class="map-placeholder">
+            <!-- URL de mapa proporcionada por el usuario -->
+            <iframe id="mapFrame" src="https://maps.app.goo.gl/eqNNC5EdhMufiU9f8?g_st=ac" title="Mapa de Huinca Renancó" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <p class="map-note">Si querés el embed oficial de Google Maps pega aquí la URL de "Insertar mapa".</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ALERTAS: contenido original adaptado -->
+    <section id="alerts" class="panel" aria-labelledby="alertsTitle">
+      <header class="hero" role="region" aria-label="Central de Alertas">
+        <div class="hero-content">
+          <h2 id="alertsTitle">🚒 Central de Alertas</h2>
+          <p>Sistema de Despacho de Emergencias</p>
+        </div>
+        <div class="hero-actions">
+          <button id="themeBtn" type="button" class="ghost" aria-pressed="false">🎨 Tema</button>
+          <button id="muteBtn" type="button" class="ghost" aria-pressed="false">🔈 Sonido</button>
+        </div>
+      </header>
+
+      <div class="panel-body">
+        <form id="alertForm" class="form-group" aria-label="Formulario de alertas">
+          <label for="tipoIncendio">Tipo de Incidente</label>
+          <select id="tipoIncendio" required aria-required="true">
+            <option value="" disabled selected>Seleccione un incidente</option>
+            <option value="forestal">🔥 Incendio Forestal</option>
+            <option value="vivienda">🏠 Incendio en Vivienda</option>
+            <option value="vehicular">🚗 Incendio Vehicular</option>
+            <option value="industrial">🏭 Incendio Industrial</option>
+            <option value="pastizal">🌾 Incendio de Pastizal</option>
+          </select>
+
+          <label for="ubicacion">Ubicación Dirección</label>
+          <input id="ubicacion" type="text" placeholder="Ej: Av. San Martín 1234" required />
+
+          <div class="controls">
+            <button id="submitBtn" type="submit" class="primary">🚨 ENVIAR UNIDAD</button>
+            <button id="quickAssign" type="button" class="secondary">Asignar Manual</button>
+          </div>
+        </form>
+
+        <aside class="status" aria-label="Estado de bomberos">
+          <section id="estadoBomberos" class="estado" aria-live="polite">
+            <h3>👨‍🚒 Estado de Bomberos</h3>
+            <p id="disponibilidad">Verificando disponibilidad...</p>
+            <ul id="listaBomberos" aria-label="Lista de bomberos"></ul>
+          </section>
+
+          <section class="filters" aria-label="Filtros">
+            <label for="filterBombero">Filtrar bombero</label>
+            <input id="filterBombero" type="text" placeholder="Buscar por nombre" />
+            <label for="filterEstado">Mostrar</label>
+            <select id="filterEstado">
+              <option value="all">Todos</option>
+              <option value="available">Disponibles</option>
+              <option value="busy">Ocupados</option>
+            </select>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- HISTORIAL -->
+    <section id="historial" class="historial" aria-labelledby="histTitle" aria-live="polite">
+      <div class="hist-header">
+        <h2 id="histTitle">📜 Historial de Alertas</h2>
+        <div class="hist-actions">
+          <button id="clearHistory" type="button" class="ghost">🧹 Limpiar</button>
+          <button id="exportHistory" type="button" class="ghost">📥 Exportar JSON</button>
+        </div>
+      </div>
+      <ul id="listaHistorial" aria-label="Historial de alertas"></ul>
+    </section>
+
+    <section id="contacto" class="card" style="margin-top:18px">
+      <h2>Contacto</h2>
+      <p>Central de Bomberos · Huinca Renancó</p>
+      <p>Agrega teléfono, e-mail o redes sociales aquí.</p>
+    </section>
+
+    <div id="alertaBox" class="alerta oculto" role="status" aria-live="assertive">
+      <span id="alertText"></span>
+      <button id="dismissAlert" class="dismiss" aria-label="Cerrar alerta">✕</button>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">© Central de Bomberos · Huinca Renancó</div>
+  </footer>
+
+  <!-- CTA fijo en móvil -->
+  <a id="mobileCta" class="mobile-cta" href="#alerts" aria-hidden="false">🚨 Enviar alerta</a>
+
+  <script src="script.js"></script>
+</body>
+</html>
